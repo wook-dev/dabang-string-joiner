@@ -3,56 +3,44 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        final String join = DabangStringJoiner
-                .join("-")
+        // simple joiner
+        final String simple = Joiner.of("simple-")
                 .add("A").add("B").add("C").add("D")
-                .build();
+                .join();
+        System.out.println("simple = " + simple);
 
-        System.out.println("join = " + join);
+        // by using builder
+        final String builder = Joiner.spice()
+                                     .prefix("prefix")
+                                     .delimiter("-")
+                                     .suffix("suffix")
+                                     .up()
+                                     .add("A").add("B").add("C").add("D")
+                                     .join();
+        System.out.println("builder = " + builder);
 
-        final String prefix = DabangStringJoiner
-                .join("prefix", "-", "")
-                .add("A").add("B").add("C").add("D")
-                .build();
+        // by using variable argument
+        final String variableArg = Joiner.of("A", "B", "C", "D").join();
+        System.out.println("variableArg = " + variableArg);
 
-        System.out.println("prefix = " + prefix);
+        // by using string array
+        final String strings = Joiner.of(new String[]{"A", "B", "C", "D"}).join();
+        System.out.println("strings = " + strings);
 
-        final String suffix = DabangStringJoiner
-                .join("", "-", "suffix")
-                .add("A").add("B").add("C").add("D")
-                .build();
+        // by using primitive number
+        final String number = Joiner.of(1, 2, 3, 4).join();
+        System.out.println("number = " + number);
 
-        System.out.println("suffix = " + suffix);
+        // by using primitive number array
+        final String ints = Joiner.of(new int[]{1, 2, 3, 4}).join();
+        System.out.println("ints = " + ints);
 
-        final String all = DabangStringJoiner
-                .join("prefix", "-", "suffix")
-                .add("A").add("B").add("C").add("D")
-                .build();
+        // by using primitive byte array
+        final String bytes = Joiner.of(new byte[]{0x2, 0x32, 0x31, 0x21}).join();
+        System.out.println("bytes = " + bytes);
 
-        System.out.println("all = " + all);
-
-        final String integerArray = DabangStringJoiner.join("prefix", "-", "suffix", new Integer[]{0, 1, 2, 3})
-                .add("A").add("B").add("C").add("D")
-                .build();
-
-        System.out.println("integerArray = " + integerArray);
-
-        final String intArray = DabangStringJoiner.join("prefix", "-", "suffix", new int[]{0, 1, 2, 3})
-                .add("A").add("B").add("C").add("D")
-                .build();
-
-        System.out.println("intArray = " + intArray);
-
-        final String stringArray = DabangStringJoiner.join("prefix", "-", "suffix", new String[]{"0", "1", "2", "3"})
-                .add("A").add("B").add("C").add("D")
-                .build();
-
-        System.out.println("stringArray = " + stringArray);
-
-        final String collection = DabangStringJoiner.join("prefix", "-", "suffix", Arrays.asList("a", "b", "c", "d"))
-                .add("A").add("B").add("C").add("D")
-                .build();
-
+        // by using collection
+        final String collection = Joiner.of(Arrays.asList("A", "B", "C", "D")).join();
         System.out.println("collection = " + collection);
     }
 }
