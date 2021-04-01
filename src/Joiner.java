@@ -14,6 +14,7 @@ public final class Joiner {
         return Joiner.spice().up().add(value);
     }
 
+
     public static Joiner of(final CharSequence value1, final CharSequence value2) {
         return Joiner.of(value1).add(value2);
     }
